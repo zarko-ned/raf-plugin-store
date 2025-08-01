@@ -85,6 +85,18 @@ export const fetchReleaseByReleaseID = async (req, res) => {
 
 export const saveRelease = async (req, res) => {
     try {
+        const apiToken = req.headers['x-api-token'] || req.headers['authorization'];
+        const staticToken = process.env.API_STATIC_TOKEN
+
+
+        if (!apiToken || apiToken !== staticToken) {
+            return res.status(401).json({
+                success: false,
+                message: 'Neautorizovan pristup'
+            });
+        }
+
+
         // Proveravamo da li postoji req.body
         if (!req.body) {
             return res.status(400).json({
