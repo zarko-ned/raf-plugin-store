@@ -1,7 +1,7 @@
 // U bilo kom drugom fajlu (npr. routes/comics.js)
 import pool from '../../db.js';  // Putanja zavisi od lokacije
 
-export const getReleasesByPluginID = async (pluginID, page = 1, limit = 10) => {
+export const getTeacherReleases = async ( page = 1, limit = 10) => {
     try {
         const offset = (page - 1) * limit;
 
@@ -9,17 +9,17 @@ export const getReleasesByPluginID = async (pluginID, page = 1, limit = 10) => {
         const [rows] = await pool.query(`
             SELECT *
             FROM plugin_release
-            WHERE plugin_id = ?
+            WHERE plugin_id = 1
             ORDER BY build_date DESC
                 LIMIT ? OFFSET ?
-        `, [pluginID, limit, offset]);
+        `, [limit, offset]);
 
         // Dohvatanje UKUPNOG broja zapisa (bez paginacije)
         const [[{ count }]] = await pool.query(`
             SELECT COUNT(*) AS count 
             FROM plugin_release 
-            WHERE plugin_id = ?
-        `, [pluginID]);
+            WHERE plugin_id = 1
+        `);
 
         return {
             data: rows,

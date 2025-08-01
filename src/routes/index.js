@@ -1,10 +1,8 @@
 import express from 'express';
 
+import {fetchAllPlugins} from "../controllers/pluginController.js";
+
 const router = express.Router();
-
-
-router.get('/', (req, res) => {
-    res.redirect('/plugins');  // Status 302 (privremeno preusmerenje)
-});
+router.get('/', fetchAllPlugins);
 
 export default router;  // Promenjeno iz module.exports

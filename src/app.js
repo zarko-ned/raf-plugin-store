@@ -4,7 +4,6 @@ import swaggerSpec from '../swagger.js';
 import cors from 'cors';
 
 import indexRouter from './routes/index.js';
-import pluginRouter from './routes/plugins.js'
 import releaseRouter from './routes/pluginReleases.js'
 
 
@@ -31,7 +30,6 @@ app.use(cors({
 
 // Rute
 app.use('/', indexRouter);       // Osnovna ruta (/)
-app.use('/plugins', pluginRouter); // Plugins ruta (/plugins)
 app.use('/teacherplugin', releaseRouter); // Plugins ruta (/teacherplugin/1)
 
 

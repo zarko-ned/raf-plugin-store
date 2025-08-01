@@ -1,10 +1,10 @@
 import express from 'express';
 
-import { fetchReleasesByPluginID } from '../controllers/pluginReleaseController.js';
+import { fetchTeacherReleases } from '../controllers/pluginReleaseController.js';
 
 
 const router = express.Router();
 
-router.get('/:pluginID',fetchReleasesByPluginID);
+router.get('/',fetchTeacherReleases);
 
 export default router;

@@ -1,19 +1,12 @@
-import { getReleasesByPluginID } from '../models/pluginRelease.js';
+import { getTeacherReleases } from '../models/pluginRelease.js';
 
 
-export const fetchReleasesByPluginID = async (req, res) => {
+export const fetchTeacherReleases = async (req, res) => {
     try {
-        const pluginID = parseInt(req.params.pluginID);
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
 
-        // Validacija
-        if (isNaN(pluginID)) {
-            return res.status(400).json({
-                success: false,
-                message: 'Nevažeći ID plugina'
-            });
-        }
+
 
         if (page < 1 || limit < 1) {
             return res.status(400).json({
@@ -23,7 +16,7 @@ export const fetchReleasesByPluginID = async (req, res) => {
         }
 
         // Dohvatanje podataka
-        const releases = await getReleasesByPluginID(pluginID, page, limit);
+        const releases = await getTeacherReleases(page, limit);
 
         // Ako nema podataka
         if (!releases.data || releases.data.length === 0) {
