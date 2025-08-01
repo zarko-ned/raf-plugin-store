@@ -30,7 +30,8 @@ app.use(cors({
 
 // Rute
 app.use('/', indexRouter);       // Osnovna ruta (/)
-app.use('/teacherplugin', releaseRouter); // Plugins ruta (/teacherplugin/1)
+app.use('/teacherplugin', releaseRouter);
+
 
 
 
