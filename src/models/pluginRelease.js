@@ -31,3 +31,22 @@ export const getTeacherReleases = async ( page = 1, limit = 10) => {
         throw new Error('Database error');
     }
 };
+
+export const getReleaseByReleaseID = async ( releaseID) => {
+    try {
+        const [rows] = await pool.query(`
+            SELECT *
+            FROM plugin_release
+            WHERE plugin_release_id = 1
+        `);
+
+
+        return {
+            data: rows,
+        };
+
+    } catch (error) {
+        console.error(`Greška pri dohvatanju izdanja plugina za ID ${releaseID}:`, error);
+        throw new Error('Database error');
+    }
+};

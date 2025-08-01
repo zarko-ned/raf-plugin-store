@@ -1,5 +1,5 @@
 import { getTeacherReleases } from '../models/pluginRelease.js';
-
+import { getReleaseByReleaseID } from '../models/pluginRelease.js';
 
 export const fetchTeacherReleases = async (req, res) => {
     try {
@@ -43,6 +43,39 @@ export const fetchTeacherReleases = async (req, res) => {
                 totalItems: releases.count,
                 itemsPerPage: limit
             }
+        });
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const fetchReleaseByReleaseID = async (req, res) => {
+    try {
+        const releaseID = parseInt(req.params.releaseID);
+        // Validacija
+        if (isNaN(releaseID)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Nevažeći ID plugina'
+            });
+        }
+
+
+        // Dohvatanje podataka
+        const release = await getReleaseByReleaseID(releaseID)
+
+        // Ako nema podataka
+        if (!release.data || release.data.length === 0) {
+            return res.json({
+                success: true,
+                data: [],
+            });
+        }
+
+        res.json({
+            success: true,
+            data: release.data,
         });
 
     } catch (error) {
