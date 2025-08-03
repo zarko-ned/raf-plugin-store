@@ -20,7 +20,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(cors({
-  origin: ['http://localhost:3000', '157.180.37.247', 'https://rafplugins.store/'],
+  origin: [,'http://localhost:4000','http://localhost:3000', '157.180.37.247', 'https://rafplugins.store/'],
 
   methods: ['GET', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
